@@ -7,6 +7,7 @@ use App\Models\Device\Available\DeviceAvailable;
 use App\Models\Device\Device;
 use App\Models\Sensor\DeviceSensor;
 use App\Models\Sensor\Fingerprint\Fingerprint;
+use App\Models\Sensor\Movement\Movement;
 use App\Models\Sensor\Relay;
 use App\Models\Utils\Utils;
 use Illuminate\Http\Request;
@@ -75,7 +76,7 @@ class DeviceController extends Controller
                 'description' => $request->input('description'),
                 'location' => $request->input('location'),
                 'state' => 'INACTIVE',
-                'device_token' => $utils->createRandomToken(20),
+                'device_token' => $utils->createRandomToken(10),
                 'id_socket' => $utils->createRandomToken(12),
                 'internal_code' => $deviceAvailable->internal_code,
                 'reference' => $deviceAvailable->reference,
@@ -110,13 +111,23 @@ class DeviceController extends Controller
 
                     $relay = $deviceSensor->relay()->save($relay); //save relay
                 }
+
+                if ($sensor->sensor == 'movement') {
+                    $movement = new Movement([
+                        'state' => 0
+                    ]);
+
+                    $movement = $deviceSensor->relay()->save($movement); //save relay
+                }
             }
 
             DB::commit();
             return response()->json(['state' => 'ok', 'message' => 'device created', 'levelNotification' => 1], 200);
         } catch (\Throwable $th) {
+            error_log($th->getMessage());
             DB::rollBack();
-            return response()->json(['state' => 'error', 'message' => 'error creating device', 'levelNotification' => 2, 'exception' => $th], 200);
+            
+            return response()->json(['state' => 'error', 'message' => 'error creating device', 'sql' => $th->getMessage(), 'levelNotification' => 2, 'exception' => $th], 200);
         }
     }
 

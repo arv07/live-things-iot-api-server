@@ -44,17 +44,7 @@ class AuthUserController extends Controller
         else {
             return response()->json(['state' => 'error', 'message' => 'user was not created', 'levelNotication' => 2], 200);
         }
-    /* } catch (\Illuminate\Database\QueryException $e) {
-        error_log($e->getMessage());
-        if ($e->errorInfo[0] = '23000') {
-            return response()->json(['error' => 'This email already exist']);
-        } else {
-            return response()->json(['error: ' => $e->getMessage()]);
-        }
-        return response()->json(['error: ' => $e->getMessage()]);
-    } */
 
-        //return response()->json(['message' => 'user created']);
         
     }
 
@@ -96,6 +86,47 @@ class AuthUserController extends Controller
 
 
     //Create user for mobile
+     /**
+        * @OA\Post(
+        * path="/api/userMobile/create",
+        * operationId="Mobile Register",
+        * tags={"Register"},
+        * summary="User Register",
+        * description="User Register here",
+        *     @OA\RequestBody(
+        *         @OA\JsonContent(),
+        *         @OA\MediaType(
+        *            mediaType="multipart/form-data",
+        *            @OA\Schema(
+        *               type="object",
+        *               required={"name","last_name","email", "password", "password_confirmation"},
+        *               @OA\Property(property="name", type="text"),
+        *               @OA\Property(property="last_name", type="text"),
+        *               @OA\Property(property="email", type="text"),
+        *               @OA\Property(property="password", type="password"),
+        *               @OA\Property(property="password_confirmation", type="password")
+        *            ),
+        *        ),
+        *    ),
+        *      @OA\Response(
+        *          response=201,
+        *          description="Register Successfully",
+        *          @OA\JsonContent()
+        *       ),
+        *      @OA\Response(
+        *          response=200,
+        *          description="Register Successfully",
+        *          @OA\JsonContent()
+        *       ),
+        *      @OA\Response(
+        *          response=422,
+        *          description="Unprocessable Entity",
+        *          @OA\JsonContent()
+        *       ),
+        *      @OA\Response(response=400, description="Bad request"),
+        *      @OA\Response(response=404, description="Resource Not Found"),
+        * )
+        */
     public function createUserMobile(RegisterRequest $request)
     {
         $utils = new Utils;

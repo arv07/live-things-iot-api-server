@@ -28,6 +28,11 @@ class DeviceAvailablesSeeder extends Seeder
             'reference' => 'G3MB-202P 5V',
         ]);
 
+        SensorAvailable::create([
+            'sensor' => 'movement',
+            'reference' => 'HC SR501',
+        ]);
+
         /** DEVICES */
         DeviceAvailable::create([
             'name' => 'Access Door V1',
@@ -54,6 +59,12 @@ class DeviceAvailablesSeeder extends Seeder
         DeviceSensorAvailable::create([
             'id_device_available' => 2, 
             'id_sensor_available' => 2
+        ]);
+
+        //Device DRL1 has HC SR501
+        DeviceSensorAvailable::create([
+            'id_device_available' => 2, 
+            'id_sensor_available' => 3
         ]);
         
     }

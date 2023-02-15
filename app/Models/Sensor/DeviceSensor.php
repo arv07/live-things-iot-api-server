@@ -5,6 +5,7 @@ namespace App\Models\Sensor;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Sensor\Fingerprint\Fingerprint;
+use App\Models\Sensor\Movement\Movement;
 
 class DeviceSensor extends Model
 {
@@ -14,7 +15,6 @@ class DeviceSensor extends Model
 
     protected $fillable = [
         'sensors'
-
     ];
 
 
@@ -26,5 +26,10 @@ class DeviceSensor extends Model
     public function relay()
     {
         return $this->hasMany(Relay::class, 'id_device_sensor', 'id_device_sensor');
+    }
+
+    public function movement()
+    {
+        return $this->hasMany(Movement::class, 'id_device_sensor', 'id_device_sensor');
     }
 }

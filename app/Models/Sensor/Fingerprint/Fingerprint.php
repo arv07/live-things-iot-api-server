@@ -12,6 +12,10 @@ class Fingerprint extends Model
     protected $table = 'fingerprint_sensors';
     protected  $primaryKey = 'id_fingerprint_sensor';
 
+    protected $fillable = [
+        'reference',
+    ];
+
 
     public function fingerprintUsers()
     {

@@ -30,7 +30,7 @@ class RelayEventController extends Controller
                 }, 'devices.sensors.relay.relayEvents' //call relationship
             ])->get();
 
-             $events = $events[0]->devices[0]->sensors[0]->relay[0]->relayEvents()->orderBy('created_at', 'desc')->limit(10)->get();
+            $events = $events[0]->devices[0]->sensors[0]->relay[0]->relayEvents()->orderBy('created_at', 'desc')->limit(10)->get();
             return response()->json(['state' => 'ok', 'message' => 'ok', 'data' => $events, 'levelNotication' => 1], 200);
             //return response()->json(['state' => 'ok', 'message' => 'ok', 'data' => $events[0]->devices[0]->sensors[0]->relay[0]->relayEvents, 'levelNotication' => 1], 200);
         } catch (\Throwable $th) {
@@ -63,17 +63,27 @@ class RelayEventController extends Controller
         $user = User::find($idUser);
 
         try {
-            $user = $user->with([
+            /* $user = $user->with([
                 'devices' => function ($query) use ($idDevice) { //Passing parameters
                     $query->where('id_device', $idDevice);
                 },
                 'devices.sensors.relay.relayEvents' //call relationship
                 //'devices.sensors.relay'
+            ])->get(); */
+            $user = $user->with([
+                'devices' => function ($query) use ($idDevice) { //Passing parameters
+                    $query->where('id_device', $idDevice);
+                },
+                'devices.sensors' => function ($query) { //Passing parameters
+                    $query->where('sensors', 'relay');
+                },
+                'devices.sensors.relay.relayEvents' //call relationship
             ])->get();
+
 
             //Create new event
             $sql = $user[0]->devices[0]->sensors[0]->relay[0]->relayEvents()->save($relayEvent);
-            
+
             //Update state in relay
             $sql2 = $user[0]->devices[0]->sensors[0]->relay[0];
             $sql2->state = $request->input('state');
@@ -118,6 +128,28 @@ class RelayEventController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function changeState(Request $request)
+    {
+        try {
+            $device = Device::where('device_token', $request->input('device_token'))->first();
+            $device = $device->with([
+                'sensors' => function ($query) { //Passing parameters
+                    $query->where('sensors', 'relay');
+                },
+                'sensors.relay' //call relationship
+            ])->get();
+
+            //Update state in relay
+            $sql2 = $device[0]->sensors[0]->relay[0];
+            $sql2->state = $request->input('state');
+            $sql2->save();
+
+            return response()->json(['state' => 'ok', 'message' => 'event created', 'sql' => $device, 'levelNotication' => 1], 200);
+        } catch (\Throwable $th) {
+            return response()->json(['state' => 'error', 'message' => 'error creating event', 'sql' => $th->getMessage(), 'levelNotication' => 2], 200);
+        }
     }
 
 

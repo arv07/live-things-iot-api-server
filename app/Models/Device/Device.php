@@ -22,7 +22,8 @@ class Device extends Model
         'internal_code',
         'reference',
         'version',
-        'device_token'
+        'device_token',
+       
 
     ];
 

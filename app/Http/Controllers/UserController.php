@@ -9,6 +9,12 @@ use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
+/**
+* @OA\Info(title="API Usuarios", version="1.0")
+*
+* @OA\Server(url="http://192.168.1.103:8000")
+*/
+
 class UserController extends Controller
 {
     public function __construct()
@@ -16,6 +22,47 @@ class UserController extends Controller
         //Only apply for the methods indicates
         $this->middleware('can:users.index')->only('getUsers');
     }
+    
+   /**
+        * @OA\Get(
+        * path="/api/user/getUsers",
+        * operationId="Register",
+        * tags={"Register"},
+        * summary="User Register",
+        * description="User Register here",
+        *     @OA\RequestBody(
+        *         @OA\JsonContent(),
+        *         @OA\MediaType(
+        *            mediaType="multipart/form-data",
+        *            @OA\Schema(
+        *               type="object",
+        *               required={"name","email", "password", "password_confirmation"},
+        *               @OA\Property(property="name", type="text"),
+        *               @OA\Property(property="email", type="text"),
+        *               @OA\Property(property="password", type="password"),
+        *               @OA\Property(property="password_confirmation", type="password")
+        *            ),
+        *        ),
+        *    ),
+        *      @OA\Response(
+        *          response=201,
+        *          description="Register Successfully",
+        *          @OA\JsonContent()
+        *       ),
+        *      @OA\Response(
+        *          response=200,
+        *          description="Register Successfully",
+        *          @OA\JsonContent()
+        *       ),
+        *      @OA\Response(
+        *          response=422,
+        *          description="Unprocessable Entity",
+        *          @OA\JsonContent()
+        *       ),
+        *      @OA\Response(response=400, description="Bad request"),
+        *      @OA\Response(response=404, description="Resource Not Found"),
+        * )
+        */
     public function getUsers(Request $request)
     {   
         //OK

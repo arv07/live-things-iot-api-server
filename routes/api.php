@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\AuthMailController;
 use App\Http\Controllers\Customer\CustomerController;
 use App\Http\Controllers\Device\DeviceController;
+use App\Http\Controllers\File\FileController;
 use App\Http\Controllers\Invoice\InvoiceController;
 use App\Http\Controllers\Product\CategoryController;
 use App\Http\Controllers\Product\ProductController;
@@ -18,6 +19,7 @@ use App\Models\Product\Subcategory;
 use App\Http\Controllers\Product\SubcategoryController;
 use App\Http\Controllers\Sensor\Fingerprint\FingerprintEntryController;
 use App\Http\Controllers\Sensor\Fingerprint\FingerprintUserController;
+use App\Http\Controllers\Sensor\Movement\MovementController;
 use App\Http\Controllers\Sensor\RelayEventController;
 use App\Http\Controllers\Socket\SocketIOController;
 use App\Models\Product\Segment;
@@ -91,6 +93,7 @@ Route::controller(DeviceController::class)->group(function () {
 Route::controller(RelayEventController::class)->group(function () {
     Route::post('/relayEvent/store', 'store')->middleware('auth:sanctum');
     Route::get('/relayEvent/{id_device?}', 'index')->middleware('auth:sanctum');
+    Route::post('/relayEvent/changeState', 'changeState');
 });
 
 
@@ -110,65 +113,15 @@ Route::controller(FingerprintEntryController::class)->group(function () {
     Route::get('/fingerprintEntry/{id_device?}', 'index')->middleware('auth:sanctum');
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Route::get("/product/getCategories", [CategoryController::class, 'getCategories'])->middleware(['auth:sanctum', 'can:detailProducts.index']);
-Route::post("/product/addCategory", [CategoryController::class, 'addCategory']);
-Route::post("/product/updateCategory", [CategoryController::class, 'updateCategory']);
-
-Route::get("/product/getSubcategories", [SubcategoryController::class, 'getSubcategories']);
-Route::get("/product/getSegments", [SegmentController::class, 'getSegments']);
-
-Route::post("/product/addProduct", [ProductController::class, 'addProduct']);
-Route::post("/product/updateProduct", [ProductController::class, 'updateProduct']);
-Route::get("/product/getProducts", [ProductController::class, 'getProducts']);
-Route::get("/product/getSearchProducts/{product?}", [ProductController::class, 'getSearchProducts']);
-Route::get("/product/getProductByBarcode/{barcode?}", [ProductController::class, 'getProductByBarcode']);
-
-
-
-
-
-
-Route::post("/user/updateRoleUser", [UserController::class, 'updateRoleUser']);
-
-Route::post("/customer/addCustomer", [CustomerController::class, 'addCustomer']);
-Route::get("/customer/findCustomer/{idCustomer?}", [CustomerController::class, 'findCustomer']);
-
-Route::post("/invoice/saveInvoice", [InvoiceController::class, 'saveInvoice']);
-Route::post("/invoice/addInvoiceDetail", [InvoiceController::class, 'addInvoiceDetail']);
-
-Route::get("/invoice/getInvoiceInProgress/{idInvoice?}", [InvoiceController::class, 'getInvoiceInprogress']);
-Route::get("/invoice/getProductsInvoiceInprogress/{id_invoice?}", [InvoiceController::class, 'getProductsInvoiceInprogress']);
-Route::post("/invoice/deleteInvoiceInProgress", [InvoiceController::class, 'deleteInvoiceInProgress']);
-Route::post("/invoice/finishSale", [InvoiceController::class, 'finishSale']);
-
-Route::get("/invoice/getInvoice/{idInvoice?}", [InvoiceController::class, 'getInvoice']);
-
-
-Route::get('/user/template', function() {
-    return view('emails.TestEmail');
+Route::controller(MovementController::class)->group(function () {
+    Route::post('/movement/update/{id_device?}', 'update')->middleware('auth:sanctum');
+    Route::get('/movement/{id_device?}', 'index')->middleware('auth:sanctum');
 });
 
-Route::view('/user/template2', 'emails.TestEmail', ['details' => 'pppp']);
-//Route::view('/user/template2', 'test', ['details' => 'pppp']);
+Route::controller(FileController::class)->group(function () {
+    //Route::get('/createFile', 'createFile');
+    Route::get('/downloadFile', 'downloadFile');
+    Route::post('/uploadFile', 'uploadFile');
+});
 
-/* Route::post('/user/create', function() {
-    return 'mensa';
-} ); */
+

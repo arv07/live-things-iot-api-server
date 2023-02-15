@@ -77,6 +77,17 @@ return new class extends Migration
                 ->onDelete('cascade')
                 ->onUpdateCascade('cascade');
         });
+
+        Schema::create('movement_sensors', function (Blueprint $table) {
+            $table->bigIncrements('id_movement_sensor');
+            $table->smallInteger('state');
+            $table->unsignedBigInteger('id_device_sensor');
+            $table->timestamps();
+            $table->foreign('id_device_sensor')
+                ->references('id_device_sensor')->on('device_sensors')
+                ->onDelete('cascade')
+                ->onUpdateCascade('cascade');
+        });
     }
 
     /**
