@@ -6,7 +6,7 @@ Este Proyecto engloba todo el desarrollo de la plataforma para la conexión de l
 
 ## Diagrama general de despliegue
 
-![App Screenshot](https://firebasestorage.googleapis.com/v0/b/landingarv.appspot.com/o/live-things-iot-img%2Flive-things-iot-general.png?alt=media&token=835c8b46-fd1f-4e51-ac1e-ac0efa7a83dc)
+![App Screenshot](https://firebasestorage.googleapis.com/v0/b/landingarv.appspot.com/o/live-things-iot-img%2Flive-things-iot-general.png?alt=media&token=7c866de8-123d-47d8-ba04-200cbf60bd71)
 
 ## Api Server
 
