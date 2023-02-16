@@ -8,13 +8,15 @@ Este Proyecto engloba todo el desarrollo de la plataforma para la conexión de l
 
 ![App Screenshot](https://firebasestorage.googleapis.com/v0/b/landingarv.appspot.com/o/live-things-iot-img%2Flive-things-iot-general.png?alt=media&token=7c866de8-123d-47d8-ba04-200cbf60bd71)
 
+En esta sección se describe lo relacionado al servidor backend para el procesamiento de datos. Si desea puede visitar los otros recursos de este proyecto:
+## 🔗 Otros recursos
+- [Api Server](https://github.com/arv07/live-things-iot-api-server)
+- [NodeJs Server (Sockets)](https://github.com/arv07/live-things-iot-socket-server)
+- [Mobile App](https://github.com/arv07/live-things-iot-mobile-app)
+- Dispositivos
+    - [DRL1 - (Bombillo Relé)](https://github.com/arv07/live-things-iot-drl1)
+
+
 ## Api Server
 
-En esta sección se describe lo relacionado al servidor backend para el procesamiento de datos. Si desea puede visitar los otros recursos de este proyecto:
-
-## 🔗 Otros recursos
-- [Api Server](https://katherineoelsner.com/)
-- [NodeJs Server (Sockets)](https://katherineoelsner.com/)
-- [Mobile App](https://katherineoelsner.com/)
-- Dispositivos
-    - [DRL1 - (Bombillo Relé)](https://katherineoelsner.com/)
+Desarrollado con PHP en el framework Laravel, para la administración de datos de la aplicación como lo son el acceso por tokens, usuarios, los dispositivos y sus eventos.
