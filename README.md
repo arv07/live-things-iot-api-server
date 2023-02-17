@@ -19,15 +19,5 @@ En esta sección se describe lo relacionado al servidor backend para el procesam
 
 ## Api Server
 
-<<<<<<< HEAD
-En esta sección se describe lo relacionado al servidor backend para el procesamiento de datos. Si desea puede visitar los otros recursos de este proyecto:
-
-## 🔗 Otros recursos
-- [Api Server](https://github.com/arv07/live-things-iot-api-server)
-- [NodeJs Server (Sockets)](https://katherineoelsner.com/)
-- [Mobile App](https://katherineoelsner.com/)
-- Dispositivos
-    - [DRL1 - (Bombillo Relé)](https://katherineoelsner.com/)
-=======
 Desarrollado con PHP en el framework Laravel, para la administración de datos de la aplicación como lo son el acceso por tokens, usuarios, los dispositivos y sus eventos.
->>>>>>> 61cd1e6fc920b58896a9be8a4f68f982ba7e97c5
+
