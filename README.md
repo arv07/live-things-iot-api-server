@@ -13,7 +13,7 @@ Este Proyecto engloba todo el desarrollo de la plataforma para la conexión de l
 En esta sección se describe lo relacionado al servidor backend para el procesamiento de datos. Si desea puede visitar los otros recursos de este proyecto:
 
 ## 🔗 Otros recursos
-- [Api Server](https://katherineoelsner.com/)
+- [Api Server](https://github.com/arv07/live-things-iot-api-server)
 - [NodeJs Server (Sockets)](https://katherineoelsner.com/)
 - [Mobile App](https://katherineoelsner.com/)
 - Dispositivos

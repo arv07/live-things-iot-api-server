@@ -68,8 +68,9 @@ Route::controller(AuthUserController::class)->group(function () {
 
 Route::controller(SocketIOController::class)->group(function () {
     Route::get('/socketio/device/{device_token?}', 'getDevice');//Get info device
-    Route::get('/socketio/user/device/{user_token?}/{id_device?}', 'getDeviceUser');//go over
-    Route::get('/socketio/device/user/{device_token?}', 'getUserDevice');
+    Route::get('/socketio/user/{user_token?}', 'getUser');//Get info device
+    Route::get('/socketio/user/getDeviceAssociated/{user_token?}/{id_device?}', 'getDeviceAssociated');//go over
+    Route::get('/socketio/device/user/{device_token?}', 'getUserDevice'); //OK
     Route::post('/socketio/device/saveIdSocket', 'saveDeviceIdSocket');
 });
 
